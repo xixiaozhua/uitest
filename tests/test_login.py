@@ -1,18 +1,21 @@
-import pytest
 import allure
-from playwright.async_api import async_playwright
+import pytest
+from core.base_test import BaseTest
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
-from utils.file_read import read_yaml
 
-config = read_yaml('config/env.yaml', env='test')
+@allure.feature("用户认证")
+class TestLogin(BaseTest):
+    """登录功能测试套件"""
 
-@pytest.mark.asyncio
-async def test_login():
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=config['headless'])
-        page = await browser.new_page()
-        await page.goto(config['base_url'], timeout=config['timeout'])
+    @allure.story("登录流程验证")
+    @pytest.mark.asyncio
+    async def test_login_flow(self, page, env):
+        """验证完整登录流程"""
+        config = await self.get_config(env)
+        
+        # 使用基类的导航方法
+        await self.goto(page, env, "/")
         
         with allure.step('验证登录按钮可见'):
             home_page = HomePage(page)
@@ -20,9 +23,12 @@ async def test_login():
             
         with allure.step('点击登录/注册按钮'):
             await home_page.click_login_signup_button()
-            assert await home_page.get_current_url() == config['base_url'] + '/login'
+            current_url = await home_page.get_current_url()
+            assert current_url == f"{config['base_url']}/login"
             
         with allure.step('验证注册表单可见'):
             login_page = LoginPage(page)
-            assert await login_page.is_signup_form_visible()            
-        await browser.close()
+            assert await login_page.is_signup_form_visible()
+        
+        # 使用基类的截图功能
+        await self.take_screenshot(page, "登录页面截图")
