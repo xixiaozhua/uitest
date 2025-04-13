@@ -1,2 +1,0 @@
-case_id,username,password,expected_result,description
-1,valid_user,valid_pass,success,有效用户名和密码
