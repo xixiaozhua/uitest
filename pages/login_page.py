@@ -4,7 +4,7 @@
 封装登录页面的元素定位和操作方法
 """
 
-from pages.base_page import BasePage
+from core.base_page import BasePage
 
 
 class LoginPage(BasePage):
