@@ -11,16 +11,18 @@ class BaseTest:
         return read_yaml('config/env.yaml', env=env)
 
     async def goto(self, page: Page, env: str, path: str = ""):
-        """整合导航与异常处理"""
-        config = await self.get_config(env)
-        base_url = config['base_url'].rstrip('/')
-        target_url = f"{base_url}/{path.lstrip('/')}" if path else base_url
-        
+        """导航到指定页面"""
         try:
+            config = await self.get_config(env)
+            base_url = config['base_url'].rstrip('/')
+            target_url = f"{base_url}/{path.lstrip('/')}" if path else base_url
+            
+            # 添加网络空闲等待
             await page.goto(target_url, timeout=config['timeout'])
+            
         except Exception as e:
-            await self._capture_failure(page, f"导航失败: {str(e)}")
-            raise
+            await self.take_screenshot(page, "页面加载失败截图")
+            raise Exception(f"页面加载失败: {str(e)}")
 
     async def _capture_failure(self, page: Page, message: str):
         """统一失败处理"""
