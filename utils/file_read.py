@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+文件读取工具模块
+提供YAML和CSV文件的读取功能
+"""
+
 import csv
 from pathlib import Path
 import yaml
@@ -5,15 +11,14 @@ from typing import Dict, Any, List
 
 
 def read_yaml(file_path: str, env: str = 'test') -> Dict[str, Any]:
-    """
-    读取yaml文件并返回解析后的数据
+    """读取yaml文件并返回解析后的数据
     
     Args:
         file_path: yaml文件路径(支持相对路径)
         env: 要读取的环境配置，默认为test
         
     Returns:
-        解析后的yaml数据
+        Dict[str, Any]: 解析后的yaml数据
         
     Raises:
         FileNotFoundError: 当文件不存在时
@@ -31,16 +36,15 @@ def read_yaml(file_path: str, env: str = 'test') -> Dict[str, Any]:
         raise yaml.YAMLError(f"YAML解析错误: {str(e)}")
 
 
-def read_csv(file_path: str, has_header: bool = True) -> List[Dict[str, str]]:
-    """
-    读取CSV文件并返回字典列表
+def read_csv(file_path: str, has_header: bool = True) -> List[Dict[str, Any]]:
+    """读取CSV文件并返回解析后的数据
     
     Args:
         file_path: CSV文件路径(支持相对路径)
-        has_header: 是否包含标题行，默认为True
+        has_header: 是否有表头，默认为True
         
     Returns:
-        包含行数据的字典列表，键为列名/列索引
+        List[Dict[str, Any]]: 解析后的CSV数据列表
         
     Raises:
         FileNotFoundError: 当文件不存在时
@@ -49,16 +53,10 @@ def read_csv(file_path: str, has_header: bool = True) -> List[Dict[str, str]]:
     try:
         abs_path = Path(__file__).parent.parent / file_path
         if not abs_path.exists():
-            raise FileNotFoundError(f"CSV文件不存在: {abs_path}")
+            raise FileNotFoundError(f"数据文件不存在: {abs_path}")
             
         with open(abs_path, 'r', encoding='utf-8') as f:
-            if has_header:
-                reader = csv.DictReader(f)
-                return [row for row in reader]
-            else:
-                reader = csv.reader(f)
-                return [{"col_{}".format(i): val for i, val in enumerate(row)} 
-                       for row in reader]
-                
+            reader = csv.DictReader(f) if has_header else csv.reader(f)
+            return list(reader)
     except csv.Error as e:
         raise csv.Error(f"CSV解析错误: {str(e)}")

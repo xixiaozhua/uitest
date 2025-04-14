@@ -8,6 +8,7 @@ from allure import label
 from core.base_page import BasePage
 from typing import Union
 
+
 class RegisterPage(BasePage):
     """
     注册页面对象，封装注册页面的元素定位和操作方法
@@ -51,10 +52,6 @@ class RegisterPage(BasePage):
         """检查注册表单是否可见"""
         return await self.is_visible(self.SIGNUP_FORM)
     
-    async def is_signup_form_present(self) -> bool:
-        """检查注册表单是否存在"""
-        return await self.is_present(self.SIGNUP_FORM)
-    
     async def wait_for_signup_form(self, timeout: float = 15.0) -> None:
         """等待注册表单加载"""
         await self.wait_for_visible(self.SIGNUP_FORM, timeout)
@@ -70,10 +67,6 @@ class RegisterPage(BasePage):
         """检查先生称呼是否可见"""
         return await self.is_visible(self.TITLE_MR)
     
-    async def is_title_mr_present(self) -> bool:
-        """检查先生称呼是否存在"""
-        return await self.is_present(self.TITLE_MR)
-    
     async def is_title_mr_checked(self) -> bool:
         """检查先生称呼是否选中"""
         return await self.is_checked(self.TITLE_MR)
@@ -87,16 +80,12 @@ class RegisterPage(BasePage):
         """检查女士称呼是否可见"""
         return await self.is_visible(self.TITLE_MRS)
     
-    async def is_title_mrs_present(self) -> bool:
-        """检查女士称呼是否存在"""
-        return await self.is_present(self.TITLE_MRS)
-    
     async def is_title_mrs_checked(self) -> bool:
         """检查女士称呼是否选中"""
         return await self.is_checked(self.TITLE_MRS)
     # endregion
 
-    # region 基本信息输入操作（每个字段3个方法）
+    # region 基本信息输入操作
     async def input_name(self, text: str) -> None:
         """输入姓名"""
         await self.wait_for_editable(self.NAME_INPUT)
@@ -105,10 +94,6 @@ class RegisterPage(BasePage):
     async def is_name_input_visible(self) -> bool:
         """检查姓名输入框是否可见"""
         return await self.is_visible(self.NAME_INPUT)
-    
-    async def is_name_input_present(self) -> bool:
-        """检查姓名输入框是否存在"""
-        return await self.is_present(self.NAME_INPUT)
 
     async def input_email(self, text: str) -> None:
         """输入邮箱"""
@@ -118,14 +103,6 @@ class RegisterPage(BasePage):
     async def is_email_input_visible(self) -> bool:
         """检查邮箱输入框是否可见"""
         return await self.is_visible(self.EMAIL_INPUT)
-    
-    async def is_email_input_present(self) -> bool:
-        """检查邮箱输入框是否存在"""
-        return await self.is_present(self.EMAIL_INPUT)
-
-    async def is_email_input_disabled(self) -> bool:
-        """检查邮箱输入框是否被禁用"""
-        return await self.is_disabled(self.EMAIL_INPUT)
 
     async def input_password(self, text: str) -> None:
         """输入密码"""
@@ -135,13 +112,9 @@ class RegisterPage(BasePage):
     async def is_password_input_visible(self) -> bool:
         """检查密码输入框是否可见"""
         return await self.is_visible(self.PASSWORD_INPUT)
-    
-    async def is_password_input_present(self) -> bool:
-        """检查密码输入框是否存在"""
-        return await self.is_present(self.PASSWORD_INPUT)
     # endregion
 
-    # region 出生日期选择操作（每个下拉框3个方法）
+    # region 出生日期选择操作
     async def select_birth_day(self, day: str) -> None:
         """选择出生日"""
         await self.wait_for_clickable(self.DAYS_SELECT)
@@ -150,10 +123,6 @@ class RegisterPage(BasePage):
     async def is_days_select_visible(self) -> bool:
         """检查日期下拉框是否可见"""
         return await self.is_visible(self.DAYS_SELECT)
-    
-    async def is_days_select_present(self) -> bool:
-        """检查日期下拉框是否存在"""
-        return await self.is_present(self.DAYS_SELECT)
 
     async def select_birth_month(self, month: str) -> None:
         """选择出生月"""
@@ -163,10 +132,6 @@ class RegisterPage(BasePage):
     async def is_months_select_visible(self) -> bool:
         """检查月份下拉框是否可见"""
         return await self.is_visible(self.MONTHS_SELECT)
-    
-    async def is_months_select_present(self) -> bool:
-        """检查月份下拉框是否存在"""
-        return await self.is_present(self.MONTHS_SELECT)
 
     async def select_birth_year(self, year: str) -> None:
         """选择出生年"""
@@ -176,13 +141,9 @@ class RegisterPage(BasePage):
     async def is_years_select_visible(self) -> bool:
         """检查年份下拉框是否可见"""
         return await self.is_visible(self.YEARS_SELECT)
-    
-    async def is_years_select_present(self) -> bool:
-        """检查年份下拉框是否存在"""
-        return await self.is_present(self.YEARS_SELECT)
     # endregion
 
-    # region 通讯选项操作（每个复选框3个方法）
+    # region 通讯选项操作
     async def check_newsletter(self) -> None:
         """勾选新闻订阅"""
         await self.wait_for_clickable(self.NEWSLETTER_CHECKBOX)
@@ -210,7 +171,7 @@ class RegisterPage(BasePage):
         return await self.is_checked(self.SPECIAL_OFFERS_CHECKBOX)
     # endregion
 
-    # region 地址信息操作（每个字段3个方法）
+    # region 地址信息操作
     async def input_first_name(self, text: str) -> None:
         """输入名字"""
         await self.wait_for_editable(self.FIRST_NAME_INPUT)
@@ -219,10 +180,6 @@ class RegisterPage(BasePage):
     async def is_first_name_visible(self) -> bool:
         """检查名字输入框是否可见"""
         return await self.is_visible(self.FIRST_NAME_INPUT)
-    
-    async def is_first_name_present(self) -> bool:
-        """检查名字输入框是否存在"""
-        return await self.is_present(self.FIRST_NAME_INPUT)
 
     async def input_last_name(self, text: str) -> None:
         """输入姓氏"""
@@ -232,10 +189,6 @@ class RegisterPage(BasePage):
     async def is_last_name_visible(self) -> bool:
         """检查姓氏输入框是否可见"""
         return await self.is_visible(self.LAST_NAME_INPUT)
-    
-    async def is_last_name_present(self) -> bool:
-        """检查姓氏输入框是否存在"""
-        return await self.is_present(self.LAST_NAME_INPUT)
 
     async def input_company(self, text: str) -> None:
         """输入公司名称"""
@@ -245,10 +198,6 @@ class RegisterPage(BasePage):
     async def is_company_visible(self) -> bool:
         """检查公司输入框是否可见"""
         return await self.is_visible(self.COMPANY_INPUT)
-    
-    async def is_company_present(self) -> bool:
-        """检查公司输入框是否存在"""
-        return await self.is_present(self.COMPANY_INPUT)
 
     async def input_address(self, text: str) -> None:
         """输入主要地址"""
@@ -258,10 +207,6 @@ class RegisterPage(BasePage):
     async def is_address_visible(self) -> bool:
         """检查地址输入框是否可见"""
         return await self.is_visible(self.ADDRESS_INPUT)
-    
-    async def is_address_present(self) -> bool:
-        """检查地址输入框是否存在"""
-        return await self.is_present(self.ADDRESS_INPUT)
 
     async def input_address2(self, text: str) -> None:
         """输入次要地址"""
@@ -271,10 +216,6 @@ class RegisterPage(BasePage):
     async def is_address2_visible(self) -> bool:
         """检查次要地址输入框是否可见"""
         return await self.is_visible(self.ADDRESS2_INPUT)
-    
-    async def is_address2_present(self) -> bool:
-        """检查次要地址输入框是否存在"""
-        return await self.is_present(self.ADDRESS2_INPUT)
 
     async def select_country(self, country: str) -> None:
         """选择国家"""
@@ -284,10 +225,6 @@ class RegisterPage(BasePage):
     async def is_country_select_visible(self) -> bool:
         """检查国家下拉框是否可见"""
         return await self.is_visible(self.COUNTRY_SELECT)
-    
-    async def is_country_select_present(self) -> bool:
-        """检查国家下拉框是否存在"""
-        return await self.is_present(self.COUNTRY_SELECT)
 
     async def input_state(self, text: str) -> None:
         """输入州/省"""
@@ -297,10 +234,6 @@ class RegisterPage(BasePage):
     async def is_state_visible(self) -> bool:
         """检查州/省输入框是否可见"""
         return await self.is_visible(self.STATE_INPUT)
-    
-    async def is_state_present(self) -> bool:
-        """检查州/省输入框是否存在"""
-        return await self.is_present(self.STATE_INPUT)
 
     async def input_city(self, text: str) -> None:
         """输入城市"""
@@ -310,10 +243,6 @@ class RegisterPage(BasePage):
     async def is_city_visible(self) -> bool:
         """检查城市输入框是否可见"""
         return await self.is_visible(self.CITY_INPUT)
-    
-    async def is_city_present(self) -> bool:
-        """检查城市输入框是否存在"""
-        return await self.is_present(self.CITY_INPUT)
 
     async def input_zipcode(self, text: str) -> None:
         """输入邮编"""
@@ -323,10 +252,6 @@ class RegisterPage(BasePage):
     async def is_zipcode_visible(self) -> bool:
         """检查邮编输入框是否可见"""
         return await self.is_visible(self.ZIPCODE_INPUT)
-    
-    async def is_zipcode_present(self) -> bool:
-        """检查邮编输入框是否存在"""
-        return await self.is_present(self.ZIPCODE_INPUT)
 
     async def input_mobile_number(self, text: str) -> None:
         """输入手机号码"""
@@ -336,10 +261,6 @@ class RegisterPage(BasePage):
     async def is_mobile_number_visible(self) -> bool:
         """检查手机输入框是否可见"""
         return await self.is_visible(self.MOBILE_NUMBER_INPUT)
-    
-    async def is_mobile_number_present(self) -> bool:
-        """检查手机输入框是否存在"""
-        return await self.is_present(self.MOBILE_NUMBER_INPUT)
     # endregion
 
     # region 表单提交操作
@@ -358,9 +279,12 @@ class RegisterPage(BasePage):
     # endregion
 
     # region 组合操作
-    async def complete_registration(self, name, user_data: Union[dict, str]) -> None:  # 添加联合类型
+    async def complete_registration(self, name: str, user_data: Union[dict, str]) -> None:
         """完整注册流程
-        :param user_data: 支持字典或JSON字符串格式
+        
+        Args:
+            name: 用户姓名
+            user_data: 用户数据，支持字典或JSON字符串格式
         """
         # 如果是字符串则转换为字典
         if isinstance(user_data, str):
@@ -402,7 +326,7 @@ class RegisterPage(BasePage):
         
         # 提交表单
         await self.click_create_account()
-        await self.wait_for_invisible(self.SIGNUP_FORM, timeout=20)
+        await self.wait_for_invisible(self.SIGNUP_FORM, timeout=20000)
     # endregion
 
     

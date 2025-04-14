@@ -25,14 +25,24 @@ class LoginPage(BasePage):
     SIGNUP_BUTTON = "button[data-qa='signup-button']"  # 注册按钮
     SIGNUP_FORM = "div.signup-form > form[action='/signup']"  # 注册表单
 
-    async def login(self, email: str, password: str):
-        """执行登录操作"""
+    async def login(self, email: str, password: str) -> None:
+        """执行登录操作
+        
+        Args:
+            email: 登录邮箱
+            password: 登录密码
+        """
         await self.fill(self.LOGIN_EMAIL_INPUT, email)
         await self.fill(self.LOGIN_PASSWORD_INPUT, password)
         await self.click(self.LOGIN_BUTTON)
 
-    async def signup(self, name: str, email: str):
-        """执行注册操作"""
+    async def signup(self, name: str, email: str) -> None:
+        """执行注册操作
+        
+        Args:
+            name: 注册姓名
+            email: 注册邮箱
+        """
         await self.fill(self.SIGNUP_NAME_INPUT, name)
         await self.fill(self.SIGNUP_EMAIL_INPUT, email)
         await self.click(self.SIGNUP_BUTTON)
@@ -41,10 +51,6 @@ class LoginPage(BasePage):
     async def is_login_form_visible(self) -> bool:
         """检查登录表单是否可见"""
         return await self.is_visible(self.LOGIN_FORM)
-    
-    async def is_login_form_present(self) -> bool:
-        """检查登录表单是否存在"""
-        return await self.is_present(self.LOGIN_FORM)
     
     async def wait_for_login_form(self, timeout: float = 15.0) -> None:
         """等待登录表单加载"""
@@ -60,10 +66,6 @@ class LoginPage(BasePage):
     async def is_login_email_visible(self) -> bool:
         """检查邮箱输入框是否可见"""
         return await self.is_visible(self.LOGIN_EMAIL_INPUT)
-    
-    async def is_login_email_present(self) -> bool:
-        """检查邮箱输入框是否存在"""
-        return await self.is_present(self.LOGIN_EMAIL_INPUT)
     # endregion
 
     # region 登录密码操作
@@ -75,10 +77,6 @@ class LoginPage(BasePage):
     async def is_login_password_visible(self) -> bool:
         """检查密码输入框是否可见"""
         return await self.is_visible(self.LOGIN_PASSWORD_INPUT)
-    
-    async def is_login_password_present(self) -> bool:
-        """检查密码输入框是否存在"""
-        return await self.is_present(self.LOGIN_PASSWORD_INPUT)
     # endregion
 
     # region 登录按钮操作
@@ -101,10 +99,6 @@ class LoginPage(BasePage):
         """检查注册表单是否可见"""
         return await self.is_visible(self.SIGNUP_FORM)
     
-    async def is_signup_form_present(self) -> bool:
-        """检查注册表单是否存在"""
-        return await self.is_present(self.SIGNUP_FORM)
-    
     async def wait_for_signup_form(self, timeout: float = 15.0) -> None:
         """等待注册表单加载"""
         await self.wait_for_visible(self.SIGNUP_FORM, timeout)
@@ -119,10 +113,6 @@ class LoginPage(BasePage):
     async def is_signup_name_visible(self) -> bool:
         """检查姓名输入框是否可见"""
         return await self.is_visible(self.SIGNUP_NAME_INPUT)
-    
-    async def is_signup_name_present(self) -> bool:
-        """检查姓名输入框是否存在"""
-        return await self.is_present(self.SIGNUP_NAME_INPUT)
     # endregion
 
     # region 注册邮箱操作
@@ -134,10 +124,6 @@ class LoginPage(BasePage):
     async def is_signup_email_visible(self) -> bool:
         """检查注册邮箱输入框是否可见"""
         return await self.is_visible(self.SIGNUP_EMAIL_INPUT)
-    
-    async def is_signup_email_present(self) -> bool:
-        """检查注册邮箱输入框是否存在"""
-        return await self.is_present(self.SIGNUP_EMAIL_INPUT)
     # endregion
 
     # region 注册按钮操作
@@ -157,14 +143,22 @@ class LoginPage(BasePage):
 
     # region 组合操作
     async def complete_login(self, credentials: dict) -> None:
-        """完整登录流程"""
+        """完整登录流程
+        
+        Args:
+            credentials: 登录凭证，包含email和password
+        """
         await self.input_login_email(credentials['email'])
         await self.input_login_password(credentials['password'])
         await self.click_login_button()
         await self.wait_for_invisible(self.LOGIN_FORM, timeout=15)
 
     async def complete_signup(self, signup_data: dict) -> None:
-        """完整注册初始化流程"""
+        """完整注册初始化流程
+        
+        Args:
+            signup_data: 注册数据，包含name和email
+        """
         await self.input_signup_name(signup_data['name'])
         await self.input_signup_email(signup_data['email'])
         await self.click_signup_button()

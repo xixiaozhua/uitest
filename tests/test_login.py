@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+登录功能测试模块
+测试用户登录功能的可用性
+"""
+
 import allure
 import pytest
 from core.base_test import BaseTest
@@ -11,11 +17,15 @@ class TestLogin(BaseTest):
 
     @allure.story("登录流程验证")
     @pytest.mark.asyncio
-    async def test_login_flow(self, page, env):
-        """验证完整登录流程"""
+    async def test_login_flow(self, page, env) -> None:
+        """验证完整登录流程
+        
+        Args:
+            page: 页面对象
+            env: 环境名称
+        """
         config = await self.get_config(env)
         
-        # 使用基类的导航方法
         await self.goto(page, env, "/")
         
         with allure.step('验证登录按钮可见'):
