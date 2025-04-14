@@ -17,6 +17,8 @@ class HomePage(BasePage):
     PRODUCTS_LINK = "a[href='/products']"  # 产品页链接
     VIEW_CART_BUTTON = "a[href='/view_cart']"  # 购物车查看按钮
     LOGIN_SIGNUP_BUTTON = "a[href='/login']"  # 登录/注册按钮
+    LOGOUT_BUTTON = "a[href='/logout']"  # 登出按钮
+    DELETE_ACCOUNT_BUTTON = "a[href='/delete_account']"  # 删除账户
     TEST_CASES_LINK = "a[href='/test_cases']"  # 测试用例页链接
     API_LIST_LINK = "a[href='/api_list']"  # API文档页链接
     YOUTUBE_CHANNEL_LINK = "a[href='https://www.youtube.com/c/AutomationExercise']"  # YouTube频道链接
@@ -130,5 +132,35 @@ class HomePage(BasePage):
     async def navigate_to_home(self):
         """通过Logo返回首页"""
         await self.click(self.HOME_LINK)
+    # endregion
+
+    # region 登出按钮操作
+    async def click_logout_button(self) -> None:
+        """点击登出按钮"""
+        await self.wait_for_clickable(self.LOGOUT_BUTTON)
+        await self.click(self.LOGOUT_BUTTON)
+    
+    async def is_logout_button_visible(self) -> bool:
+        """检查登出按钮是否可见"""
+        return await self.is_visible(self.LOGOUT_BUTTON)
+    
+    async def is_logout_button_present(self) -> bool:
+        """检查登出按钮是否存在"""
+        return await self.is_present(self.LOGOUT_BUTTON)
+    # endregion
+
+    # region 删除账户操作
+    async def click_delete_account_button(self) -> None:
+        """点击删除账户按钮"""
+        await self.wait_for_clickable(self.DELETE_ACCOUNT_BUTTON)
+        await self.click(self.DELETE_ACCOUNT_BUTTON)
+    
+    async def is_delete_account_button_visible(self) -> bool:
+        """检查删除按钮是否可见"""
+        return await self.is_visible(self.DELETE_ACCOUNT_BUTTON)
+    
+    async def is_delete_account_button_present(self) -> bool:
+        """检查删除按钮是否存在"""
+        return await self.is_present(self.DELETE_ACCOUNT_BUTTON)
     # endregion
         

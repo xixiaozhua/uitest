@@ -24,7 +24,6 @@ class TestHome(BaseTest):
         with allure.step('点击Logo刷新页面'):
             await self.home_page.navigate_to_home()
 
-    # 其他测试方法移除setup_method调用，参数列表保持为空
     @allure.story("产品链接验证")
     @pytest.mark.asyncio
     async def test_products_link(self):

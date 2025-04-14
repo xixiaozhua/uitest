@@ -2,7 +2,8 @@ import allure
 import pytest_asyncio
 from playwright.async_api import async_playwright, Page, Browser
 from utils.file_read import read_yaml
-from typing import Dict, Any
+from utils.file_read import read_csv
+from typing import Dict, Any, List
 
 
 class BaseTest:
@@ -10,6 +11,9 @@ class BaseTest:
     
     async def get_config(self, env: str) -> dict:
         return read_yaml('config/env.yaml', env=env)
+    
+    async def get_data(self, file_path: str, has_header: bool=True) -> List[Dict[str, Any]]:
+        return read_csv(f"datas/{file_path}", has_header=has_header)
 
     async def goto(self, page: Page, env: str, path: str = ""):
         """导航到指定页面"""
