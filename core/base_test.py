@@ -36,16 +36,21 @@ class BaseTest:
         target_url = f"{base_url}/{path.lstrip('/')}" if path else base_url
         await page.goto(target_url, timeout=config['timeout'])
     
+    @pytest_asyncio.fixture(autouse=True)
+    async def auto_teardown(self, request, page):
+        """带失败检测的自动清理"""
+        yield
+        # 仅在测试失败时截图
+        if request.node.rep_call.failed:
+            await self.take_screenshot(page, "测试失败截图")
+        # 无论成功失败都关闭页面
+        await page.close()
+
     async def take_screenshot(self, page, name: str):
-        """截取页面截图并附加到Allure报告"""
-        screenshot = await page.screenshot(full_page=True)
+        """增强版截图方法"""
+        screenshot = await page.screenshot(full_page=True, type="png")
         allure.attach(
             screenshot,
             name=name,
             attachment_type=allure.attachment_type.PNG
         )
-    
-    async def teardown_method(self, page):
-        """测试清理方法"""
-        await self.take_screenshot(page, "测试结束截图")
-        await page.close()

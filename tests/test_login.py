@@ -29,6 +29,4 @@ class TestLogin(BaseTest):
         with allure.step('验证注册表单可见'):
             login_page = LoginPage(page)
             assert await login_page.is_signup_form_visible()
-        
-        # 使用基类的截图功能
-        await self.take_screenshot(page, "登录页面截图")
+
