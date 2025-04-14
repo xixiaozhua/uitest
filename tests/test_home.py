@@ -5,6 +5,7 @@ from core.base_test import BaseTest
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
 
+
 @allure.feature("首页功能")
 class TestHome(BaseTest):
     @pytest_asyncio.fixture(autouse=True)

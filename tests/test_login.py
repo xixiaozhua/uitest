@@ -4,6 +4,7 @@ from core.base_test import BaseTest
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
 
+
 @allure.feature("用户认证")
 class TestLogin(BaseTest):
     """登录功能测试套件"""

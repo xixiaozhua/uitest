@@ -4,6 +4,7 @@ from playwright.async_api import async_playwright, Page, Browser
 from utils.file_read import read_yaml
 from typing import Dict, Any
 
+
 class BaseTest:
     """测试基类（仅保留业务逻辑）"""
     

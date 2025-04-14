@@ -11,7 +11,7 @@ class LoginPage(BasePage):
     """
     登录页面对象，封装登录页面的元素定位和操作方法
     """
-
+    
     # 页面元素选择器
     # 登录
     LOGIN_EMAIL_INPUT = "input[data-qa='login-email']"  # 登录邮箱输入框

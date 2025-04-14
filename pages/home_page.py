@@ -12,6 +12,7 @@ class HomePage(BasePage):
     首页页面对象，封装页面的元素定位和操作方法
     """
 
+
     # 页面元素选择器
     PRODUCTS_LINK = "a[href='/products']"  # 产品页链接
     VIEW_CART_BUTTON = "a[href='/view_cart']"  # 购物车查看按钮

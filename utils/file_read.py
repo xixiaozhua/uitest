@@ -2,6 +2,7 @@ from pathlib import Path
 import yaml
 from typing import Dict, Any
 
+
 def read_yaml(file_path: str, env: str = 'test') -> Dict[str, Any]:
     """
     读取yaml文件并返回解析后的数据

@@ -6,7 +6,6 @@
 
 from playwright.async_api import Page
 
-
 class BasePage:
     """
     基础页面对象，封装Playwright异步API的基本页面操作方法
