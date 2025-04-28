@@ -1,5 +1,6 @@
 name: Automated API Tests
 
+
 on: [push, pull_request]
 
 jobs:
@@ -16,6 +17,11 @@ jobs:
 
     - name: Install Apifox CLI
       run: npm install -g apifox-cli
+
+    - name: 修改hosts文件
+      run: |
+        echo "47.99.171.17 dev-cn.your-api-server.com" | sudo tee -a /etc/hosts
+        sudo systemctl restart systemd-resolved  # 刷新DNS缓存
 
     - name: Running Test Scenario
       run: apifox run --access-token APS-po9v2C4tYuLot9KpbNoGZRuJZSe86M4X -t 6459171 -e 32496415 -n 1 -r html,cli
