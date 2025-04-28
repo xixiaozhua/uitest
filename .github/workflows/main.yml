@@ -24,4 +24,4 @@ jobs:
         sudo systemctl restart systemd-resolved  # 刷新DNS缓存
 
     - name: Running Test Scenario
-      run: apifox run --access-token APS-po9v2C4tYuLot9KpbNoGZRuJZSe86M4X -t 6459171 -e 32496415 -n 1 -r html,cli
+      run: apifox run --access-token APS-po9v2C4tYuLot9KpbNoGZRuJZSe86M4X -t 6459171 -e 32496410 -n 1 -r html,cli
