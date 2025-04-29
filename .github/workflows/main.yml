@@ -22,6 +22,7 @@ jobs:
       run: |
         echo "47.99.171.17 dev-cn.your-api-server.com" | sudo tee -a /etc/hosts
         sudo systemctl restart systemd-resolved  # 刷新DNS缓存
+        sudo systemd-resolve --flush-caches
 
     - name: Running Test Scenario
       run: apifox run --access-token APS-po9v2C4tYuLot9KpbNoGZRuJZSe86M4X -f 7277361 -e 32496410 -n 1 -r html,cli --upload-report
